@@ -8,7 +8,7 @@ const ToDoCreate = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newTodo = {
-            id: Math.floor(Math.random() * 50000) + 1,
+            // id: Math.floor(Math.random() * 50000) + 1,
             title: getNewTodo,
         };
         axios.post("http://localhost:5000/", newTodo).then((res) => {});
@@ -17,12 +17,26 @@ const ToDoCreate = (props) => {
     const handleNewTodo = (e) => {
         setNewTodo(e.target.value);
     };
+    props.func();
 
     return (
-        <form className="todo-form" onSubmit={handleSubmit}>
-            <input type="text" value={getNewTodo} onChange={handleNewTodo} />
-            <button type="submit">Add</button>
-        </form>
+        <>
+            <form className="todo-form row g-3" onSubmit={handleSubmit}>
+                <div className="col-auto">
+                    <input
+                        className="form-control"
+                        type="text"
+                        value={getNewTodo}
+                        onChange={handleNewTodo}
+                    />
+                </div>
+                <div className="col-auto">
+                    <button className="btn btn-primary mb-2" type="submit">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </>
     );
 };
 export default ToDoCreate;
